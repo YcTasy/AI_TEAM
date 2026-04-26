@@ -1,0 +1,16 @@
+name: Models update remain
+
+on:
+  schedule:
+    - cron: '0 9 1 * *' # 每月1號早上9點
+jobs:
+  slack_notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack Message
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {"text": "🚀 模型更新提醒：請團隊檢查本月最新版本與策略調整。"}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
